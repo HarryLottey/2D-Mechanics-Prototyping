@@ -14,6 +14,7 @@ public class UserController : MonoBehaviour
             move = gameObject.transform.Find("[ScriptsReference]").GetComponent<Movement>();
     }
     
+    // Apply functions that always check for input
     void Update()
     {
         #region Apply Movement via Axis Movement
