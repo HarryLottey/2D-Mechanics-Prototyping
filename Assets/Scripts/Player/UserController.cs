@@ -5,13 +5,25 @@ using UnityEngine;
 public class UserController : MonoBehaviour
 {
     // This script calls fucntions by user input from other scripts which have defined those functions.
-
+    SpellBook accessSpells;
     Movement move;
+    Casting cast;
+
+    void Awake()
+    {
+        accessSpells = gameObject.GetComponentInParent<SpellBook>();
+
+        if (move == null)
+            move = gameObject.transform.Find("[ScriptsReference]").GetComponent<Movement>();
+
+        if (cast == null)
+            cast = gameObject.transform.Find("[ScriptsReference]").GetComponent<Casting>();
+
+    }
 
     void Start()
     {
-        if (move == null)
-            move = gameObject.transform.Find("[ScriptsReference]").GetComponent<Movement>();
+        
     }
     
     // Apply functions that always check for input
@@ -23,9 +35,17 @@ public class UserController : MonoBehaviour
         move.PlayerMovement(LeftRightMovement, VerticalMovement);
         #endregion
 
+        #region Cast Spells via MouseButton Input
 
+        // STORE THE INDEX OF ASSIGNED SPELLS, so we can cast them
 
-        
+        if (Input.GetMouseButton(0))
+        {
+            // TEMPORARY MAKE IT DYNAMIC
+            cast.RegularCast(0);
+        }
+
+        #endregion
 
     }
 
@@ -72,6 +92,6 @@ public class UserController : MonoBehaviour
 
     }
     */
-   
- 
+
+
 }

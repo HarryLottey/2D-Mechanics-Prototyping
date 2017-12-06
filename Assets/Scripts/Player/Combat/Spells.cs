@@ -4,8 +4,15 @@ using System.Collections;
 [System.Serializable]
 public class Spells
 {
+    #region ENUMS
+    public enum spellType { MISSILE, AOECAST, SELFCAST }
+    // Missile: the spell projects forwards like a projectile or lazer
+    // AOECAST: the spell is cast in area of effect around the cursor position
+    // SELFCAST: the spell is cast and apply effects dirrectly to the player
+    public enum spellEffect { AIR, WATER, EARTH, FIRE }
+
+    #endregion
     #region Variables & parameters
-    
     #region privateVariables
 
     private int id, castRange;
@@ -94,30 +101,14 @@ public class Spells
         get { return _spelleffect; }
         set { _spelleffect = value; }
     }
-    #endregion
+
 
     
 
     #endregion
-
-
-
-    #region Spells
-
-    
-
-
-    #endregion
-    
+    #endregion    
 }
 
-#region ENUMS
-public enum spellType { MISSILE, AOECAST, SELFCAST }
-// Missile: the spell projects forwards like a projectile or lazer
-// AOECAST: the spell is cast in area of effect around the cursor position
-// SELFCAST: the spell is cast and apply effects dirrectly to the player
-public enum spellEffect { AIR, WATER, EARTH, FIRE }
 
-#endregion
 
 

@@ -2,30 +2,29 @@
 
 public static class SpellGen
 {
+
+    // This script sets data to create spells
+
     public static Spells CreateSpell(int spellID)
     {
+        #region variables
         Spells temp = new Spells();
-        #region Variables // DefaultStateBlank
         string spellname = "";
         string description = "";
         string icon = "";
         string sprite = "";
-        string animation = ""; // Redundant
         int damage = 0;
         float cooldown = 0;
         float radius = 0;
         int castrange = 0;
-        spellEffect statusEffect = spellEffect.AIR; // default
-        spellType type = spellType.MISSILE; // default
-        
-
-        //spelltype
-        //spelleffect
+        Spells.spellEffect statusEffect = Spells.spellEffect.AIR; // default
+        Spells.spellType type = Spells.spellType.MISSILE; // default
+        #endregion
 
         #region SpellData
         switch (spellID)
         {
-            // Tier 1 Spells 
+            // Tier 1 Spells /// PLAYER SPELLS
             case 0:
                 castrange = 50;
                 damage = 15;
@@ -35,8 +34,8 @@ public static class SpellGen
                 description = "a low level air missile";
                 icon = "airstrikeI";
                 sprite = "airstrikeS";
-                type = spellType.MISSILE;
-                statusEffect = spellEffect.AIR;
+                type = Spells.spellType.MISSILE;
+                statusEffect = Spells.spellEffect.AIR;
                 break;
             case 1:
                 castrange = 50;
@@ -47,8 +46,8 @@ public static class SpellGen
                 description = "";
                 icon = "waterstrikeI";
                 sprite = "waterstrikeS";
-                type = spellType.MISSILE;
-                statusEffect = spellEffect.WATER;
+                type = Spells.spellType.MISSILE;
+                statusEffect = Spells.spellEffect.WATER;
                 break;
             case 2:
                 castrange = 50;
@@ -59,8 +58,8 @@ public static class SpellGen
                 description = "";
                 icon = "earthstrikeI";
                 sprite = "earthstrikeS";
-                type = spellType.MISSILE;
-                statusEffect = spellEffect.EARTH;
+                type = Spells.spellType.MISSILE;
+                statusEffect = Spells.spellEffect.EARTH;
                 break;
             case 3:
                 castrange = 50;
@@ -71,11 +70,9 @@ public static class SpellGen
                 description = "";
                 icon = "firestrikeI";
                 sprite = "firestrikeS";
-                type = spellType.MISSILE;
-                statusEffect = spellEffect.FIRE;
-                break;
-
-                // Tier 2 spells
+                type = Spells.spellType.MISSILE;
+                statusEffect = Spells.spellEffect.FIRE;
+                break;        
         }
 
         #endregion
@@ -92,14 +89,9 @@ public static class SpellGen
         temp.SpellEffect = statusEffect;
         temp.Icon = Resources.Load("Icons/" + icon) as Sprite;
         temp.Sprite = Resources.Load("Sprites/" + sprite) as Sprite;
-        // type
-        // effect
-        #endregion
+        temp.SpellType = type;
+        temp.SpellEffect = statusEffect;
         return temp;
         #endregion
-
     }
-
-
-
 }
