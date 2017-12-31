@@ -8,6 +8,8 @@ public class UserController : MonoBehaviour
     SpellBook accessSpells;
     Movement move;
     Casting cast;
+    
+    
 
     void Awake()
     {
@@ -38,8 +40,11 @@ public class UserController : MonoBehaviour
         #region Cast Spells via MouseButton Input
 
         // STORE THE INDEX OF ASSIGNED SPELLS, so we can cast them
+        
 
-        if (Input.GetMouseButton(0))
+        
+
+        if (Input.GetMouseButtonDown(0))
         {
             // TEMPORARY MAKE IT DYNAMIC
             cast.RegularCast(0);
@@ -48,50 +53,4 @@ public class UserController : MonoBehaviour
         #endregion
 
     }
-
-    /*
-
-    IEnumerator CastSpell()
-    {
-        SpellBook spellToCast = gameObject.GetComponent<SpellBook>();
-        Event e;
-
-        simultaneousCastTimer -= Time.deltaTime;
-        // If the timer is greater than 0 then we are eligible to combine spells
-        if (simultaneousCastTimer > 0)
-        {
-            simultaneousCast = true;
-            // If timer is below 0 and simCast still true, set it to false.
-            if(simultaneousCastTimer < 0 && simultaneousCast == true)
-            {
-                simultaneousCast = false;
-            }
-        }
-        // If both inputs are triggered during the small window of time to simcast then activate simcast
-        if (simultaneousCast && Input.GetMouseButtonDown(0) && Input.GetMouseButtonDown(1))
-        {
-            // call simcast
-        }
-
-        // Regular Cast
-
-        if (slot1Cast)
-        {
-           // Cast(spellToCast.assignedSpells[0]); // Left click
-        }
-
-        if (slot2Cast)
-        {
-           // Cast(spellToCast.assignedSpells[1]); // Right Click
-        }
-
-        float cd1 = spellToCast.assignedSpells[0].CoolDown;
-        float cd2 = spellToCast.assignedSpells[1].CoolDown;
-
-        yield return new WaitForSeconds(0);
-
-    }
-    */
-
-
 }

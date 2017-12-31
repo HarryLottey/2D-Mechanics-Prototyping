@@ -10,18 +10,19 @@ public class SpellBook : MonoBehaviour
     // This script acts like an inventory for our spells, it stores unlocked spells, and assigns spells for the player to cast.
 
     public List<Spells> acquiredSpells = new List<Spells>(); // Spells you have unlocked
-    public List<Spells> assignedSpells = new List<Spells>(); // Spells you have assigned (4 Max)
-    public Vector2 missileCastOrigin; // Instantiation point for missile like spells /// REDUNDANT MAYBE
+    public List<Spells> assignedSpells = new List<Spells>(); // Spells you have assigned (2 Max)
+    
   
 
     void Start()
     {
         StartCoroutine(unlockSpellsTier1());
-        assignedSpells.Add(new Spells());
+        assignedSpells.Add(new Spells()); // Empty Spell slots
         assignedSpells.Add(new Spells());
 
         for (int i = 0; i < assignedSpells.Count; i++)
         {
+            // Assigning aquired spells to be used. Defaults to first two.
             assignedSpells[i] = acquiredSpells[i];
         }
     }

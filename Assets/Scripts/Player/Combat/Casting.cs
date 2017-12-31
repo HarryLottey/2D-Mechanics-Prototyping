@@ -13,34 +13,22 @@ public class Casting : MonoBehaviour
     public bool comboCast, slot1Cast, slot2Cast, simultaneousCast; // Bools will go active which will allow us to activate specific casting patterns.
 
     [Header("Spell Isntantiation Variables")]
-    public Vector3 spellCastOrigin;
-    public Vector3 cursorDirection;
+    public GameObject spellCastOrigin;
+    GameObject spellCast;
 
-    #region Spell GameObjects (Animated Sprite)
-    public GameObject airStrikeProjectile; // Game object with animated sprite to be instantiated
-    public GameObject waterStrikeProjectile;
-    public GameObject earthStrikeProjectile;
-    public GameObject fireStrikeProjectile;
-
-    #endregion
 
     private void Awake()
     {
         accessSpells = gameObject.GetComponentInParent<SpellBook>();
-        airStrikeProjectile = Resources.Load("Sprites/AirStrike") as GameObject;
     }
 
     // This is just a cast which is not special in any way.
     public void RegularCast(int spellID)
     {
-        // Instantiate GameObject projectile
-        // at the player position in the direction of the cursor.
-
-        Instantiate(accessSpells.assignedSpells[spellID].Sprite, spellCastOrigin, Quaternion.identity);
-        
-
-        
+        // Instantiate the prefab correlating with the spellID, set the direction to that of the cursor from the spellcast origin.
+        spellCast = Instantiate(accessSpells.assignedSpells[spellID].Prefab, spellCastOrigin.transform.position, Quaternion.Euler(new Vector3(0,0,spellCastOrigin.transform.eulerAngles.z)));     
     }
+
 }
 
   
