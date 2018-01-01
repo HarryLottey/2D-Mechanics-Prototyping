@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +9,11 @@ public class UserController : MonoBehaviour
     SpellBook accessSpells;
     Movement move;
     Casting cast;
+
+    #region Input Variables for spellcasting
     
-    
+
+    #endregion
 
     void Awake()
     {
@@ -39,18 +43,49 @@ public class UserController : MonoBehaviour
 
         #region Cast Spells via MouseButton Input
 
-        // STORE THE INDEX OF ASSIGNED SPELLS, so we can cast them
-        
+        // Cooldown timer for spell actions
 
-        
 
-        if (Input.GetMouseButtonDown(0))
+
+
+        if (Input.GetMouseButtonDown(0) && !Input.GetKey(KeyCode.LeftShift))
         {
-            // TEMPORARY MAKE IT DYNAMIC
-            cast.RegularCast(0);
+            StartCoroutine(SpellSlot1Casting());
         }
+
+        if(Input.GetMouseButtonDown(0) && !Input.GetKey(KeyCode.LeftShift))
+        {
+            // Shift Modifier cast here
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            // 1 = the second spell in the list of assigned spells
+            cast.RegularCast(accessSpells.assignedSpells[1].ID);
+        }
+
 
         #endregion
 
     }
+
+    IEnumerator SpellSlot1Casting()
+    {
+        yield return new WaitForSeconds(0.005f);
+        // If the mousebutton is lifted, a charge spell was not intended and a regular spell will be fired.
+        if (cast.chargeTimer < cast.chargeLimit)
+        {
+            if(cast.chargeTimer > 0.05)
+            {
+                StopCoroutine(SpellSlot1Casting());
+            }
+            // 0 = the first spell in the list of assigned spells
+            // ID is passed so that we call an int to activate a spell by ID number
+            cast.RegularCast(accessSpells.assignedSpells[0].ID);
+        }
+        // reset timer once spellcasting is complete.       
+        float cd = accessSpells.assignedSpells[0].CoolDown;
+        yield return new WaitForSeconds(cd);
+    }
+
 }
